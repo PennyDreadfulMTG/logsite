@@ -1,0 +1,18 @@
+<tr>
+    <td class="marginalia">{{{stars_safe}}}</td>
+    <td><a href="{{url}}">{{{id}}}</a></td>
+    {{^hide_record}}
+        <td>{{record}}</td>
+    {{/hide_record}}
+    {{^hide_winner}}
+        <td><a href="{{winner_url}}">{{winner}}</a></td>
+    {{/hide_winner}}
+    {{^hide_opponent}}
+        <td><a href="{{opponent_url}}">{{opponent}}</a></td>
+    {{/hide_opponent}}
+    <td data-text="{{date_sort}}">
+        {{display_date}}
+    </td>
+    {{! Empty column to hold the toggle when footable kicks in.}}
+    <td></td>
+</tr>

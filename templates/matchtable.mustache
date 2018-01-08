@@ -1,0 +1,26 @@
+{{> spinner}}
+<table class="with-marginalia">
+    <thead>
+        <tr>
+            <th data-breakpoints="xs" class="marginalia" data-sortInitialOrder="desc">⇅</th>
+            <th>ID</th>
+            {{^hide_record}}
+                <th data-breakpoints="xs">Record</th>
+            {{/hide_record}}
+            {{^hide_winner}}
+                <th data-breakpoints="xs sm md">Winner</th>
+            {{/hide_winner}}
+            {{#show_opponent}}
+                <th data-breakpoints="xs sm md" data-sortInitialOrder="desc">Opponent</th>
+            {{/show_opponent}}
+            <th data-breakpoints="xs" data-sortInitialOrder="desc">Date</th>
+            {{! Empty column to hold the toggle when footable kicks in. }}
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#matches}}
+            {{> matchrow}}
+        {{/matches}}
+    </tbody>
+</table>

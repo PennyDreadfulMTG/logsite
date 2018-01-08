@@ -1,0 +1,5 @@
+Flask
+Flask-SQLAlchemy
+Flask-OAuth
+Flask-Login
+sqlalchemy_utils

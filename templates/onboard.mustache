@@ -1,0 +1,26 @@
+<!-- <i>This page onboards new printings, and asks the user to compare against existing known cards.</i> -->
+<h2>Is this artwork a reprint?</h2>
+<i>Please be sure to check that the artwork is identical.  We know the card itself is a reprint.</i>
+{{#card}}
+<section>
+<h3>{{name}} by {{artist}} ({{set_code_upper}})</h3>
+<img src="{{image_uri}}" />
+<div>Image Hash: <pre>{{card_hash}}</pre></div>
+</section>
+{{/card}}
+
+<div>
+<form method="post">
+{{#potentials}}
+<section>
+<h3>{{set_name}}</h3>
+<img class="small_card" src="{{image_uri}}"/><br/>
+<button type="submit" name="chosen" value="{{id}}"> {{set_code_upper}} </button>
+<!-- <div>Hamming Distance: <pre>{{hamm}}</pre> (smaller is better)</div> -->
+</section>
+{{/potentials}}
+<p>
+<button type="submit" name="chosen" value="-1"> None of the above </button>
+</p>
+</form>
+</div>
