@@ -27,7 +27,7 @@ class View:
         # return url_for('static', filename='js/tooltips.js', v=self.commit_id())
 
     def js_url(self):
-        return url_for('static', filename='js/pd.js', v=self.commit_id())
+        return 'https://pennydreadfulmagic.com/static/js/pd.js'
 
     def menu(self):
         needs_tagging_badge = None

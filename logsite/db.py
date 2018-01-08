@@ -35,9 +35,13 @@ class Match(db.Model):
     players = db.relationship('User', secondary=match_players)
     modules = db.relationship('Module', secondary=match_modules)
     games = db.relationship('Game', backref='match')
+    format = db.relationship('Format')
 
     def url(self):
         return url_for('show_match', id=self.id)
+
+    def format_name(self):
+        return self.format.get_name()
 
 class Game(db.Model):
     __tablename__ = 'game'
@@ -56,6 +60,11 @@ class Format(db.Model):
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String(20))
     friendly_name = sa.Column(sa.String(20))
+
+    def get_name(self):
+        if self.friendly_name:
+            return self.friendly_name
+        return self.name
 
 class Module(db.Model):
     __tablename__ = 'module'

@@ -1,6 +1,12 @@
 <tr>
     <td class="marginalia">{{{stars_safe}}}</td>
     <td><a href="{{url}}">{{{id}}}</a></td>
+    {{^hide_comment}}
+        <td data-breakpoints="xs">{{comment}}</td>
+    {{/hide_comment}}
+    {{^hide_format}}
+        <td data-breakpoints="xs">{{format_name}}</td>
+    {{/hide_format}}
     {{^hide_record}}
         <td>{{record}}</td>
     {{/hide_record}}

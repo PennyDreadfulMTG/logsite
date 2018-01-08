@@ -17,4 +17,4 @@ def get_match(match_id: int) -> Match:
     return Match.query.filter_by(id=match_id).one_or_none()
 
 def get_recent_matches(count: int=10) -> List[Match]:
-    return Match.query.limit(count).all()
+    return Match.query.order_by(Match.id.desc()).limit(count).all()
