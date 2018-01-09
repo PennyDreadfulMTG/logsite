@@ -12,12 +12,17 @@ from .data import match
 @APP.route('/')
 def home():
     importing.load_from_file()
-    view = views.Home(match.get_recent_matches())
+    view = views.Home(match.get_recent_matches(10).items)
     return view.page()
 
 @APP.route('/about/')
 def about():
     view = views.About()
+    return view.page()
+
+@APP.route('/matches/')
+def matches():
+    view = views.Matches(match.get_recent_matches(None))
     return view.page()
 
 @APP.route('/match/<id>/')

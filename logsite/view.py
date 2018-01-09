@@ -33,6 +33,7 @@ class View:
         needs_tagging_badge = None
         menu = [
             {'name': 'Home', 'url': url_for('home')},
+            {'name': 'Matches', 'url': url_for('matches')},
             {'name': 'About', 'url': url_for('about')},
         ]
         return menu
