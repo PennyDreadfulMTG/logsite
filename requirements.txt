@@ -2,4 +2,6 @@ Flask
 Flask-SQLAlchemy
 Flask-OAuth
 Flask-Login
+inflect==0.2.5
 sqlalchemy_utils
+titlecase==0.12.0
