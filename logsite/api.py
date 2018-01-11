@@ -24,7 +24,7 @@ def upload():
     if match.get_match(match_id) is not None:
         return generate_error('already_imported', 'Match is already in DB')
     lines = request.form['lines']
-    importing.import_log(lines, match_id)
+    importing.import_log(lines.split('\n'), match_id)
     return return_json({'success': True})
 
 @APP.route('/api/gitpull', methods=['GET', 'POST'])
