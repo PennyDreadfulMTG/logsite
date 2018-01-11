@@ -3,6 +3,7 @@ import json
 from flask import Response, request, session, url_for
 
 from . import APP, importing
+from .data import match
 from shared import configuration
 from shared.serialization import extra_serializer
 
@@ -10,12 +11,18 @@ from shared.serialization import extra_serializer
 def admin():
     return return_json(session.get('admin'))
 
+@APP.route('/api/matchExists/<match_id>')
+def match_exists(match_id):
+    return return_json(match.get_match(match_id) is not None)
+
 @APP.route('/api/upload')
 def upload():
     error = validate_api_key()
     if error:
         return error
-    match_id = request.form['match_id']
+    match_id = int(request.form['match_id'])
+    if match.get_match(match_id) is not None:
+        return generate_error('already_imported', 'Match is already in DB')
     lines = request.form['lines']
     importing.import_log(lines, match_id)
     return return_json({'success': True})
