@@ -1,4 +1,4 @@
-import json
+import json, subprocess
 
 from flask import Response, request, session, url_for
 
@@ -35,8 +35,7 @@ def gitpull():
         uwsgi.reload()
     except ImportError:
         pass
-    view = views.About()
-    return view.page()
+    return return_json(APP.config['commit-id'])
 
 def generate_error(code, msg):
     return {'error': True, 'code': code, 'msg': msg}
