@@ -58,7 +58,9 @@ class Game(db.Model):
     __tablename__ = 'game'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
     match_id = sa.Column(sa.Integer, db.ForeignKey('match.id'), nullable=False)
+    winner_id = sa.Column(sa.Integer, sa.ForeignKey('user.id'), nullable=True)
     log = sa.Column(sa.Text)
+    winner = db.relationship('User')
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -70,7 +72,7 @@ class Format(db.Model):
     __tablename__ = 'format'
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String(40))
-    friendly_name = sa.Column(sa.String(20))
+    friendly_name = sa.Column(sa.String(40))
 
     def get_name(self):
         if self.friendly_name:
