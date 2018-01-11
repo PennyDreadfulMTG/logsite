@@ -23,9 +23,9 @@ match_players = db.Table('match_players',
 )
 
 match_modules = db.Table('match_modules',
-    db.Column('match_id', db.Integer, db.ForeignKey('match.id'), primary_key=True),
-    db.Column('module_id', db.Integer, db.ForeignKey('module.id'), primary_key=True)
-)
+                         db.Column('match_id', db.Integer, db.ForeignKey('match.id'), primary_key=True),
+                         db.Column('module_id', db.Integer, db.ForeignKey('module.id'), primary_key=True)
+                        )
 
 class Match(db.Model):
     __tablename__ = 'match'
@@ -63,13 +63,13 @@ class Game(db.Model):
 class User(db.Model):
     __tablename__ = 'user'
     id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String(20))
+    name = sa.Column(sa.String(60))
     discord_id = sa.Column(sa.String(200))
 
 class Format(db.Model):
     __tablename__ = 'format'
     id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String(20))
+    name = sa.Column(sa.String(40))
     friendly_name = sa.Column(sa.String(20))
 
     def get_name(self):
