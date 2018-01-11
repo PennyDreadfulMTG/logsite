@@ -34,17 +34,6 @@ def show_match(match_id):
 def favicon(rest):
     return send_from_directory(os.path.join(APP.root_path, 'static/images/favicon'), 'favicon{rest}'.format(rest=rest))
 
-@APP.route('/api/gitpull', methods=['GET', 'POST'])
-def gitpull():
-    subprocess.check_output(['git', 'pull'])
-    try:
-        import uwsgi
-        uwsgi.reload()
-    except ImportError:
-        pass
-    view = views.About()
-    return view.page()
-
 @APP.route('/reset/db/')
 def reset_db():
     db.db.drop_all()

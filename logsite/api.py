@@ -15,7 +15,7 @@ def admin():
 def match_exists(match_id):
     return return_json(match.get_match(match_id) is not None)
 
-@APP.route('/api/upload')
+@APP.route('/api/upload', methods=['POST'])
 def upload():
     error = validate_api_key()
     if error:
@@ -27,6 +27,16 @@ def upload():
     importing.import_log(lines, match_id)
     return return_json({'success': True})
 
+@APP.route('/api/gitpull', methods=['GET', 'POST'])
+def gitpull():
+    subprocess.check_output(['git', 'pull'])
+    try:
+        import uwsgi
+        uwsgi.reload()
+    except ImportError:
+        pass
+    view = views.About()
+    return view.page()
 
 def generate_error(code, msg):
     return {'error': True, 'code': code, 'msg': msg}
