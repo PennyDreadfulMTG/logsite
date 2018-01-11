@@ -3,7 +3,7 @@ import json, subprocess
 from flask import Response, request, session, url_for
 
 from . import APP, importing
-from .data import match, game
+from .data import match
 from shared import configuration
 from shared.serialization import extra_serializer
 
@@ -13,11 +13,7 @@ def admin():
 
 @APP.route('/api/matchExists/<match_id>')
 def match_exists(match_id):
-    local = match.get_match(match_id)
-    if local is not None:
-        final: game.Game = local.games[-1]
-        return return_json("Match Winner" in final.log)
-    return return_json(False)
+    return return_json(match.get_match(match_id) is not None)
 
 @APP.route('/api/upload', methods=['POST'])
 def upload():
