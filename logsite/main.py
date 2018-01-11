@@ -25,9 +25,10 @@ def matches():
     view = views.Matches(match.get_recent_matches(None))
     return view.page()
 
-@APP.route('/match/<id>/')
-def show_match(id):
-    pass
+@APP.route('/match/<match_id>/')
+def show_match(match_id):
+    view = views.Match(match.get_match(match_id))
+    return view.page()
 
 @APP.route('/favicon<rest>')
 def favicon(rest):

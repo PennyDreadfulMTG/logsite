@@ -22,7 +22,7 @@ def import_log(lines, match_id):
     comment = lines[1]
     modules = [mod.strip() for mod in lines[2].split(',')]
     players = [player.strip() for player in lines[3].split(',')]
-    match_model = match.create_match(match_id, format_name, comment, modules, players)
+    match.create_match(match_id, format_name, comment, modules, players)
     lines = lines[4:]
     while lines[0] != '':
         lines = lines[1:]

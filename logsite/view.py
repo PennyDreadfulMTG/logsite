@@ -23,8 +23,8 @@ class View:
         return 'https://pennydreadfulmagic.com/static/css/pd.css'
 
     def tooltips_url(self):
+        return url_for('static', filename='js/tooltips.js', v=self.commit_id())
         return None
-        # return url_for('static', filename='js/tooltips.js', v=self.commit_id())
 
     def js_url(self):
         return 'https://pennydreadfulmagic.com/static/js/pd.js'

@@ -38,10 +38,19 @@ class Match(db.Model):
     format = db.relationship('Format')
 
     def url(self):
-        return url_for('show_match', id=self.id)
+        return url_for('show_match', match_id=self.id)
 
     def format_name(self):
         return self.format.get_name()
+
+    def host(self):
+        return self.players[0]
+
+    def other_players(self):
+        return self.players[1:]
+
+    def other_player_names(self):
+        return [p.name for p in self.other_players()]
 
 class Game(db.Model):
     __tablename__ = 'game'
