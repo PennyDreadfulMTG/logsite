@@ -32,6 +32,8 @@ class Match(db.Model):
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
     format_id = sa.Column(sa.Integer, sa.ForeignKey('format.id'))
     comment = sa.Column(sa.String(200))
+    start_time = db.Column(sa.DateTime)
+    end_time = db.Column(sa.DateTime)
     players = db.relationship('User', secondary=match_players)
     modules = db.relationship('Module', secondary=match_modules)
     games = db.relationship('Game', backref='match')
