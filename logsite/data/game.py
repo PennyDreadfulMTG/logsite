@@ -22,5 +22,5 @@ class Game(fsa.Model):
 
 def insert_game(game_id, match_id, game_lines) -> None:
     local = Game(id=game_id, match_id=match_id, log=game_lines)
-    db.Add(local)
+    db.Merge(local) # This will replace an old version of the game, if one exists.
     db.Commit()

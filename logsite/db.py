@@ -55,6 +55,9 @@ def Commit():
 def Add(item):
     return db.session.add(item)
 
+def Merge(item):
+    return db.session.merge(item)
+
 def Delete(item):
     return db.session.delete(item)
 

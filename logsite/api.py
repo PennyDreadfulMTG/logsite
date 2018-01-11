@@ -21,8 +21,6 @@ def upload():
     if error:
         return error
     match_id = int(request.form['match_id'])
-    if match.get_match(match_id) is not None:
-        return generate_error('already_imported', 'Match is already in DB')
     lines = request.form['lines']
     importing.import_log(lines.split('\n'), match_id)
     return return_json({'success': True})
