@@ -1,4 +1,4 @@
-import glob, os, re
+import glob, os, re, shutil
 from typing import List
 from . import db
 
@@ -11,8 +11,10 @@ def load_from_file():
     for fname in files:
         match_id = int(os.path.basename(fname).split('.')[0])
         if match.get_match(match_id) is None:
-            lines = open(fname).readlines()
-            import_log(lines, match_id)
+            with open(fname) as f:
+                lines = f.readlines()
+                import_log(lines, match_id)
+            shutil.move(fname, 'import/processed/{0}.txt'.format(match_id))
             return
 
 def import_log(lines, match_id):
@@ -40,4 +42,6 @@ def import_log(lines, match_id):
                 game_lines = list()
         else:
             game_lines.append(line)
+    db.insert_game(game_id, match_id, '\n'.join(game_lines))
+
 
