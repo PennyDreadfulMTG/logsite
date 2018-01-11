@@ -19,7 +19,7 @@ class Match(View):
             self.game_two = match.games[1]
         if len(match.games) > 2:
             self.has_game_three = True
-            self.game_three = match.games[3]
+            self.game_three = match.games[2]
 
     def subtitle(self):
         return None
