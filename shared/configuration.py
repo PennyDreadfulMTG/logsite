@@ -12,7 +12,8 @@ DEFAULTS = {
     'mysql_user': 'pennydreadful',
     'GOOGLE_CLIENT_ID': '',
     'GOOGLE_CLIENT_SECRET': '',
-    'web_cache': '.web_cache'
+    'web_cache': '.web_cache',
+    'pdbot_api_token': lambda: ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(32)),
 }
 
 def get(key):

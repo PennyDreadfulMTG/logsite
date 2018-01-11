@@ -2,13 +2,24 @@ import json
 
 from flask import Response, request, session, url_for
 
-from . import APP
+from . import APP, importing
 from shared import configuration
 from shared.serialization import extra_serializer
 
 @APP.route('/api/admin/')
 def admin():
     return return_json(session.get('admin'))
+
+@APP.route('/api/upload')
+def upload():
+    error = validate_api_key()
+    if error:
+        return error
+    match_id = request.form['match_id']
+    lines = request.form['lines']
+    importing.import_log(lines, match_id)
+    return return_json({'success': True})
+
 
 def generate_error(code, msg):
     return {'error': True, 'code': code, 'msg': msg}
