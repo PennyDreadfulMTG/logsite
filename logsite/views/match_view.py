@@ -1,4 +1,6 @@
 from flask import url_for
+import inflect
+import titlecase
 
 from ..view import View
 from ..data.match import Match as Model
@@ -24,3 +26,16 @@ class Match(View):
 
     def subtitle(self):
         return None
+
+    def og_title(self):
+        return self.players_string
+
+    def og_url(self):
+        return url_for('show_match', match_id=self.id, _external=True)
+
+    def og_description(self):
+        p = inflect.engine()
+        fmt = titlecase.titlecase(p.a(self.format_name))
+        description = '{fmt} match.'.format(fmt=fmt)
+        return description
+
