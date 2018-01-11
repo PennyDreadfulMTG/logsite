@@ -1,7 +1,37 @@
 from typing import List
+from flask import url_for
+import sqlalchemy as sa
 
 from .. import db
-from ..db import Match
+from ..db import db as fsa
+
+class Match(fsa.Model):
+    __tablename__ = 'match'
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
+    format_id = sa.Column(sa.Integer, sa.ForeignKey('format.id'))
+    comment = sa.Column(sa.String(200))
+    start_time = sa.Column(sa.DateTime)
+    end_time = sa.Column(sa.DateTime)
+    players = fsa.relationship('User', secondary=db.match_players)
+    modules = fsa.relationship('Module', secondary=db.match_modules)
+    games = fsa.relationship('Game', backref='match')
+    format = fsa.relationship('Format')
+
+    def url(self):
+        return url_for('show_match', match_id=self.id)
+
+    def format_name(self):
+        return self.format.get_name()
+
+    def host(self):
+        return self.players[0]
+
+    def other_players(self):
+        return self.players[1:]
+
+    def other_player_names(self):
+        return [p.name for p in self.other_players()]
+
 
 def create_match(match_id: int, format_name: str, comment: str, modules: List[str], players: List[str]) -> Match:
     format_id = db.get_or_insert_format(format_name).id

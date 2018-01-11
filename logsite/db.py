@@ -27,41 +27,6 @@ match_modules = db.Table('match_modules',
                          db.Column('module_id', db.Integer, db.ForeignKey('module.id'), primary_key=True)
                         )
 
-class Match(db.Model):
-    __tablename__ = 'match'
-    id = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
-    format_id = sa.Column(sa.Integer, sa.ForeignKey('format.id'))
-    comment = sa.Column(sa.String(200))
-    start_time = db.Column(sa.DateTime)
-    end_time = db.Column(sa.DateTime)
-    players = db.relationship('User', secondary=match_players)
-    modules = db.relationship('Module', secondary=match_modules)
-    games = db.relationship('Game', backref='match')
-    format = db.relationship('Format')
-
-    def url(self):
-        return url_for('show_match', match_id=self.id)
-
-    def format_name(self):
-        return self.format.get_name()
-
-    def host(self):
-        return self.players[0]
-
-    def other_players(self):
-        return self.players[1:]
-
-    def other_player_names(self):
-        return [p.name for p in self.other_players()]
-
-class Game(db.Model):
-    __tablename__ = 'game'
-    id = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
-    match_id = sa.Column(sa.Integer, db.ForeignKey('match.id'), nullable=False)
-    winner_id = sa.Column(sa.Integer, sa.ForeignKey('user.id'), nullable=True)
-    log = sa.Column(sa.Text)
-    winner = db.relationship('User')
-
 class User(db.Model):
     __tablename__ = 'user'
     id = sa.Column(sa.Integer, primary_key=True)
@@ -119,8 +84,3 @@ def get_or_insert_user(name: str) -> User:
     Add(local)
     Commit()
     return local
-
-def insert_game(game_id, match_id, game_lines) -> None:
-    local = Game(id=game_id, match_id=match_id, log=game_lines)
-    Add(local)
-    Commit()

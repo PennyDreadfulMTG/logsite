@@ -1,7 +1,7 @@
 from flask import url_for
 
 from ..view import View
-from ..db import Match as Model
+from ..data.match import Match as Model
 
 
 # pylint: disable=no-self-use
@@ -9,6 +9,7 @@ class Match(View):
     def __init__(self, match: Model) -> None:
         self.match = match
         self.id = match.id
+        self.comment = match.comment
         self.format_name = match.format_name()
         self.players_string = ' vs '.join([p.name for p in match.players])
         self.game_one = match.games[0]

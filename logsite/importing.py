@@ -2,7 +2,7 @@ import glob, os, re, shutil
 from typing import List
 from . import db
 
-from .data import match
+from .data import match, game
 
 REGEX_GAME_HEADER = r'== Game \d \((?P<id>\d+)\) =='
 
@@ -24,7 +24,7 @@ def import_log(lines, match_id):
     comment = lines[1]
     modules = [mod.strip() for mod in lines[2].split(',')]
     players = [player.strip() for player in lines[3].split(',')]
-    match.create_match(match_id, format_name, comment, modules, players)
+    local = match.create_match(match_id, format_name, comment, modules, players)
     lines = lines[4:]
     while lines[0] != '':
         lines = lines[1:]
@@ -37,11 +37,11 @@ def import_log(lines, match_id):
             if game_id == 0:
                 game_id = new_id
             elif new_id != game_id:
-                db.insert_game(game_id, match_id, '\n'.join(game_lines))
+                game.insert_game(game_id, match_id, '\n'.join(game_lines))
                 game_id = new_id
                 game_lines = list()
         else:
             game_lines.append(line)
-    db.insert_game(game_id, match_id, '\n'.join(game_lines))
+    game.insert_game(game_id, match_id, '\n'.join(game_lines))
 
 
