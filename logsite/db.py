@@ -2,6 +2,7 @@ from typing import List
 
 from flask import url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm.exc import MultipleResultsFound
 import sqlalchemy as sa
 
 from . import APP
@@ -80,10 +81,15 @@ def get_or_insert_module(name: str) -> Module:
     return local
 
 def get_or_insert_user(name: str) -> User:
-    local = User.query.filter_by(name=name).one_or_none()
-    if local is not None:
+    try:
+        local = User.query.filter_by(name=name).one_or_none()
+        if local is not None:
+            return local
+        local = User(name=name)
+        Add(local)
+        Commit()
         return local
-    local = User(name=name)
-    Add(local)
-    Commit()
-    return local
+    except MultipleResultsFound:
+        query = User.query.filter_by(name=name)
+        # todo: Merge errant entry
+        return query.first()
