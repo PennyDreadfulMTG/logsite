@@ -1,4 +1,4 @@
-import glob, os, re, shutil
+import datetime, glob, os, re, shutil
 from typing import List
 from . import db
 
@@ -17,7 +17,7 @@ def load_from_file():
             shutil.move(fname, 'import/processed/{0}.txt'.format(match_id))
             return
 
-def import_log(lines, match_id):
+def import_log(lines: List[str], match_id: int):
     lines = [line.strip('\r\n') for line in lines]
     print('importing {0}'.format(match_id))
     format_name = lines[0]
@@ -31,11 +31,11 @@ def import_log(lines, match_id):
     while lines[0] != '':
         lines = lines[1:]
     game_id = 0
-    game_lines = list()
+    game_lines: List[str] = list()
     for line in lines:
         m = re.match(REGEX_GAME_HEADER, line)
         if m:
-            new_id = m.group('id')
+            new_id = int(m.group('id'))
             if game_id == 0:
                 game_id = new_id
             elif new_id != game_id:
@@ -45,5 +45,3 @@ def import_log(lines, match_id):
         else:
             game_lines.append(line)
     game.insert_game(game_id, match_id, '\n'.join(game_lines))
-
-

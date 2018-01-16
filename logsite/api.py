@@ -1,4 +1,4 @@
-import json, subprocess
+import datetime, json, subprocess
 
 from flask import Response, request, session, url_for
 
@@ -23,6 +23,10 @@ def upload():
     match_id = int(request.form['match_id'])
     lines = request.form['lines']
     importing.import_log(lines.split('\n'), match_id)
+    start_time = datetime.datetime.fromtimestamp(request.form['start_time_utc'])
+    end_time = datetime.datetime.fromtimestamp(request.form['end_time_utc'])
+    match.get_match(match_id).set_times(start_time, end_time)
+
     return return_json({'success': True})
 
 @APP.route('/api/gitpull', methods=['GET', 'POST'])

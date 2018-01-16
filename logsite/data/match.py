@@ -2,6 +2,8 @@ from typing import List
 from flask import url_for
 import sqlalchemy as sa
 
+from shared import dtutil
+
 from .. import db
 from ..db import db as fsa
 
@@ -31,6 +33,11 @@ class Match(fsa.Model):
 
     def other_player_names(self):
         return [p.name for p in self.other_players()]
+
+    def set_times(self, start_time: int, end_time: int):
+        self.start_time = dtutil.ts2dt(start_time)
+        self.end_time = dtutil.ts2dt(end_time)
+        db.Commit()
 
 
 def create_match(match_id: int, format_name: str, comment: str, modules: List[str], players: List[str]) -> Match:
