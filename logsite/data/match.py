@@ -39,6 +39,12 @@ class Match(fsa.Model):
         self.end_time = dtutil.ts2dt(end_time)
         db.Commit()
 
+    def display_date(self):
+        if self.start_time is None:
+            return ""
+        else:
+            return dtutil.display_date(self.start_time)
+
 
 def create_match(match_id: int, format_name: str, comment: str, modules: List[str], players: List[str]) -> Match:
     format_id = db.get_or_insert_format(format_name).id

@@ -51,13 +51,15 @@ def day_of_week(dt, tz):
 def form_date(dt, tz):
     return dt.astimezone(tz).strftime(FORM_FORMAT)
 
-def display_date(dt, granularity=1):
+def display_date(dt: datetime.datetime, granularity: int = 1):
+    if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+        dt = dt.replace(tzinfo=pytz.utc)
     start = now()
     if (start - dt) > datetime.timedelta(365):
-        s = '{:%b %Y}'.format(dt.astimezone(WOTC_TZ))
+        s = '{:%b %Y}'.format(dt.astimezone(UTC_TZ))
         return replace_day_with_ordinal(s)
     if (start - dt) > datetime.timedelta(28):
-        s = '{:%b _%d_}'.format(dt.astimezone(WOTC_TZ))
+        s = '{:%b _%d_}'.format(dt.astimezone(UTC_TZ))
         return replace_day_with_ordinal(s)
     else:
         suffix = 'ago' if start > dt else 'from now'
