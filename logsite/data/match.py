@@ -61,3 +61,6 @@ def get_match(match_id: int) -> Match:
 
 def get_recent_matches(count: int=10) -> List[Match]:
     return Match.query.order_by(Match.id.desc()).paginate(per_page=count)
+
+def get_recent_matches_by_player(name: str) -> List[Match]:
+    return Match.query.filter(Match.players.any(db.User.name == name)).order_by(Match.id.desc()).paginate()

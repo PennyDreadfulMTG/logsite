@@ -34,6 +34,9 @@ class User(db.Model):
     name = sa.Column(sa.String(60))
     discord_id = sa.Column(sa.String(200))
 
+    def url(self):
+        return url_for('show_person', person=self.name)
+
 class Format(db.Model):
     __tablename__ = 'format'
     id = sa.Column(sa.Integer, primary_key=True)

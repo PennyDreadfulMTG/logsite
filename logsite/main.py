@@ -20,6 +20,16 @@ def about():
     view = views.About()
     return view.page()
 
+@APP.route('/people/')
+def people():
+    view = views.People()
+    return view.page()
+
+@APP.route('/people/<person>/')
+def show_person(person=None):
+    view = views.Matches(match.get_recent_matches_by_player(person))
+    return view.page()
+
 @APP.route('/matches/')
 def matches():
     view = views.Matches(match.get_recent_matches(None))
