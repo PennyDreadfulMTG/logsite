@@ -7,23 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-06 17:11+1100\n"
-"PO-Revision-Date: 2018-02-06 17:55+1100\n"
-"Language: es\n"
-"Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.3\n"
+"POT-Creation-Date: 2018-02-06 19:31+1100\n"
+"PO-Revision-Date: 2018-02-06 19:31+1100\n"
 "Last-Translator: Katelyn Gigante <clockwork.singularity@gmail.com>\n"
+"Language-Team: es <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.5.3\n"
 "X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: logsite/translatable_view.py:17
+#: logsite/views/about.py:15
+msgid "About PDBot"
+msgstr ""
+
+#: logsite/views/about.py:18
+msgid ""
+"PDBot is a robot that observes people playing games on Magic Online, and "
+"provides the role of judge, informing players with legality and bug "
+"information"
+msgstr ""
+
+#: logsite/views/about.py:21
+msgid "This site is currently translated into:"
+msgstr ""
+
+#: logsite/views/about.py:24
+msgid "Help us translate the site into your language"
+msgstr ""
+
+#: logsite/views/home.py:16
 msgid "Latest Matches"
 msgstr "Últimos partidos"
 
-#: logsite/translatable_view.py:20
+#: logsite/views/home.py:19
 #, fuzzy
 msgid "More matches…"
 msgstr "Ver más"

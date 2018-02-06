@@ -1,4 +1,5 @@
 from flask import url_for
+from flask_babel import gettext
 
 from logsite.view import View
 
@@ -10,3 +11,9 @@ class Home(View):
 
     def subtitle(self):
         return None
+
+    def TT_LATEST_MATCHES(self):
+        return gettext("Latest Matches")
+
+    def TT_MORE_MATCHES(self):
+        return gettext("More matches…")

@@ -4,9 +4,8 @@ from collections import Counter
 from flask import session, url_for
 
 from . import APP, template
-from .translatable_view import TranslatableView
 # pylint: disable=no-self-use, too-many-public-methods
-class View(TranslatableView):
+class View:
     def template(self):
         return self.__class__.__name__.lower()
 
