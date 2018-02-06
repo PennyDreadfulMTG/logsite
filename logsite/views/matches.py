@@ -1,4 +1,4 @@
-from flask import url_for
+from flask import request, url_for
 
 from logsite.view import View
 
@@ -9,9 +9,9 @@ class Matches(View):
         self.has_next = matches.has_next
         self.has_prev = matches.has_prev
         if matches.has_next:
-            self.next_url = url_for('matches', page=matches.next_num)
+            self.next_url = url_for(request.endpoint, page=matches.next_num)
         if matches.has_prev:
-            self.prev_url = url_for('matches', page=matches.prev_num)
+            self.prev_url = url_for(request.endpoint, page=matches.prev_num)
 
     def subtitle(self):
         return None
