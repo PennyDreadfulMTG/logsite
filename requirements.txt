@@ -1,4 +1,5 @@
 Flask
+Flask-Babel
 Flask-SQLAlchemy
 Flask-OAuth
 Flask-Login

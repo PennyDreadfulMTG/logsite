@@ -1,0 +1,29 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-06 17:11+1100\n"
+"PO-Revision-Date: 2018-02-06 17:55+1100\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+"Last-Translator: Katelyn Gigante <clockwork.singularity@gmail.com>\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: logsite/translatable_view.py:17
+msgid "Latest Matches"
+msgstr "Últimos partidos"
+
+#: logsite/translatable_view.py:20
+#, fuzzy
+msgid "More matches…"
+msgstr "Ver más"
