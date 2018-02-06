@@ -27,12 +27,12 @@ def people():
 
 @APP.route('/people/<person>/')
 def show_person(person=None):
-    view = views.Matches(match.get_recent_matches_by_player(person))
+    view = views.Matches(person=person)
     return view.page()
 
 @APP.route('/matches/')
 def matches():
-    view = views.Matches(match.get_recent_matches(None))
+    view = views.Matches()
     return view.page()
 
 @APP.route('/match/<match_id>/')
