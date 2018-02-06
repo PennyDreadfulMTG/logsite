@@ -15,9 +15,9 @@ class Matches(View):
         self.has_next = matches.has_next
         self.has_prev = matches.has_prev
         if matches.has_next:
-            self.next_url = url_for(request.endpoint, page=matches.next_num)
+            self.next_url = url_for(request.endpoint, person=person, page=matches.next_num)
         if matches.has_prev:
-            self.prev_url = url_for(request.endpoint, page=matches.prev_num)
+            self.prev_url = url_for(request.endpoint, person=person, page=matches.prev_num)
 
     def subtitle(self):
         return None
