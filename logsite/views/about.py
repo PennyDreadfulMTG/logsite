@@ -6,7 +6,7 @@ from logsite.view import View
 # pylint: disable=no-self-use
 class About(View):
     def subtitle(self) -> str:
-        return 'About'
+        return gettext('About')
 
     def languages(self) -> str:
         return ", ".join([locale.display_name for locale in babel.list_translations()])

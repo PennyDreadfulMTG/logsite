@@ -6,6 +6,7 @@
             <tr>
                 <th data-breakpoints="xs" class="marginalia" data-sortInitialOrder="desc">⇅</th>
                 <th>Name</th>
+                <th># of Matches</th>
                 {{! Empty column to hold the toggle when footable kicks in. }}
                 <td></td>
             </tr>
@@ -15,6 +16,7 @@
                 <tr>
                     <td class="marginalia">{{{stars_safe}}}</td>
                     <td><a href="{{url}}">{{name}}</a></td>
+                    <td>{{num_matches}}</td>
                     {{! Empty column to hold the toggle when footable kicks in.}}
                     <td></td>
                 </tr>

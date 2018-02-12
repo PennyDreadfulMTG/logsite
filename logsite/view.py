@@ -33,6 +33,7 @@ class View:
         menu = [
             {'name': 'Home', 'url': url_for('home')},
             {'name': 'Matches', 'url': url_for('matches')},
+            {'name': 'People', 'url': url_for('people')},
             {'name': 'About', 'url': url_for('about')},
         ]
         return menu

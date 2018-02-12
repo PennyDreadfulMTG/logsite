@@ -2,6 +2,7 @@ from flask import url_for
 
 from logsite.view import View
 from .. import db
+from ..data import match
 
 # pylint: disable=no-self-use
 class People(View):
@@ -17,3 +18,7 @@ class People(View):
 
     def subtitle(self):
         return None
+
+    def prepare(self):
+        for p in self.people:
+            p.num_matches = match.get_recent_matches_by_player(p.name).count()

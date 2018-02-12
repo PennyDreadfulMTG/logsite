@@ -9,7 +9,7 @@ class Matches(View):
         if person is None:
             matches = match.get_recent_matches(None)
         else:
-            matches = match.get_recent_matches_by_player(person)
+            matches = match.get_recent_matches_by_player(person).paginate()
 
         self.matches = matches.items
         self.has_next = matches.has_next
