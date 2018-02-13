@@ -23,7 +23,7 @@ def stats():
     for m in base_query.group_by(match.Match.format_id).filter(match.Match.start_time > last_month).order_by(func.count(match.Match.format_id).desc()).all():
         f = m[0].format
         val['formats'][f.name]['last_month'] = m[1]
-    for u in db.db.session.query() #users where mathc in last month
+    # for u in db.db.session.query(): #users where mathc in last month
         # val['formats'][f.name]['recent_players']
 
 
