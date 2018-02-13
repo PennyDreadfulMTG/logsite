@@ -12,5 +12,6 @@ def extra_serializer(obj):
         return obj.to_eng_string()
     elif isinstance(obj, set) or type(obj) == 'dict_keys': #pylint: disable=unidiomatic-typecheck
         return list(obj)
-
+    elif hasattr(obj, 'to_json'):
+        return obj.to_json()
     raise TypeError("Type {t} not serializable - {obj}".format(t=type(obj), obj=obj))
