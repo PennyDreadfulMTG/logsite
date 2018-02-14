@@ -5,7 +5,8 @@ from .data import match
 from .api import return_json
 from shared import dtutil
 
-@APP.route('/stats/')
+@APP.route('/stats.json')
+@APP.route('/stats')
 def stats():
     val = {}
     val['formats'] = {}
