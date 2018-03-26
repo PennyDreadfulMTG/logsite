@@ -5,6 +5,7 @@ from . import db
 from .data import match, game
 
 REGEX_GAME_HEADER = r'== Game \d \((?P<id>\d+)\) =='
+REGEX_SWITCHEROO = r'!! Warning, unexpected game 3 !!'
 
 def load_from_file():
     files = glob.glob('import/queue/*.txt')
@@ -42,6 +43,9 @@ def import_log(lines: List[str], match_id: int):
                 game.insert_game(game_id, match_id, '\n'.join(game_lines))
                 game_id = new_id
                 game_lines = list()
+        elif re.match(REGEX_SWITCHEROO, line):
+            local.has_unexpected_third_game = True
+            game_lines.append(line)
         else:
             game_lines.append(line)
     game.insert_game(game_id, match_id, '\n'.join(game_lines))

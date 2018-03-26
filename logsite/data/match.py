@@ -14,6 +14,11 @@ class Match(fsa.Model):
     comment = sa.Column(sa.String(200))
     start_time = sa.Column(sa.DateTime)
     end_time = sa.Column(sa.DateTime)
+
+    has_unexpected_third_game = sa.Column(sa.Boolean)
+    is_league = sa.Column(sa.Boolean)
+    is_tournament = sa.Column(sa.Boolean)
+
     players = fsa.relationship('User', secondary=db.match_players)
     modules = fsa.relationship('Module', secondary=db.match_modules)
     games = fsa.relationship('Game', backref='match')
