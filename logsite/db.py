@@ -2,6 +2,7 @@ from typing import List
 
 from flask import url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from sqlalchemy.orm.exc import MultipleResultsFound
 import sqlalchemy as sa
 
@@ -17,6 +18,7 @@ APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{user}:{password}@{host}:{port}
     db=configuration.get('mysql_database'))
 
 db = SQLAlchemy(APP)
+migrate = Migrate(APP, db)
 
 match_players = db.Table('match_players',
     db.Column('match_id', db.Integer, db.ForeignKey('match.id'), primary_key=True),

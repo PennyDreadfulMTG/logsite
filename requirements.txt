@@ -3,6 +3,7 @@ Flask-Babel
 Flask-SQLAlchemy
 Flask-OAuth
 Flask-Login
+Flask-Migrate
 inflect==0.2.5
 sqlalchemy_utils
 titlecase==0.12.0
