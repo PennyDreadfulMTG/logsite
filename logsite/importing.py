@@ -28,6 +28,8 @@ def import_log(lines: List[str], match_id: int):
     local = match.get_match(match_id)
     if local is None:
         local = match.create_match(match_id, format_name, comment, modules, players)
+    if local.has_unexpected_third_game is None:
+        local.has_unexpected_third_game = False
     lines = lines[4:]
     while lines[0] != '':
         lines = lines[1:]
