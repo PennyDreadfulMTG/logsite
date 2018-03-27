@@ -4,7 +4,7 @@ from flask import url_for
 
 from ..data.match import Match as Model
 from ..view import View
-
+from .. import importing
 
 # pylint: disable=no-self-use
 class Match(View):
@@ -23,6 +23,8 @@ class Match(View):
         if len(match.games) > 2:
             self.has_game_three = True
             self.game_three = match.games[2]
+        if match.has_unexpected_third_game is None:
+            importing.reimport(match)
         self.has_unexpected_third_game = match.has_unexpected_third_game
 
     def subtitle(self):

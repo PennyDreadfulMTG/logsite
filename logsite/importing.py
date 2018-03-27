@@ -56,9 +56,10 @@ def import_log(lines: List[str], match_id: int):
             game_lines.append(line)
     game.insert_game(game_id, match_id, '\n'.join(game_lines))
 
-def reimport(match_id: int):
-    local = match.get_match(match_id)
-    for game in local.games:
-        if local.has_unexpected_third_game is None and re.match(REGEX_SWITCHEROO, game.log):
+def reimport(local: match.Match):
+    for lgame in local.games:
+        if local.has_unexpected_third_game is None and re.match(REGEX_SWITCHEROO, lgame.log):
             local.has_unexpected_third_game = True
-    pass
+    if local.has_unexpected_third_game is None:
+        local.has_unexpected_third_game = False
+    match.db.Commit() # This is bad
