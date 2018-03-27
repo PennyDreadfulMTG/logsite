@@ -43,6 +43,25 @@ def gitpull():
         pass
     return return_json(APP.config['commit-id'])
 
+@APP.route('/export/<match_id>')
+def export(match_id: int):
+    local = match.get_match(match_id)
+    text = '{format}\n{comment}\n{mods}\n{players}\n\n'.format(
+        format=local.format.name,
+        comment=local.comment,
+        mods=",".join([m.name for m in local.modules]),
+        players=",".join([p.name for p in local.players]))
+    n = 1
+    for game in local.games:
+        text += '== Game {n} ({id}) ==\n'.format(n=n, id=game.id)
+        n = n + 1
+        text += game.log.strip()
+        text += '\n\n'
+    return (text, 200, {
+        'Content-type': 'text/plain; charset=utf-8',
+        # 'Content-Disposition': 'attachment; filename={match_id}.txt'.format(match_id=match_id)
+        })
+
 def generate_error(code, msg):
     return {'error': True, 'code': code, 'msg': msg}
 
