@@ -8,6 +8,7 @@ from .data import game, match
 
 REGEX_GAME_HEADER = r'== Game \d \((?P<id>\d+)\) =='
 REGEX_SWITCHEROO = r'!! Warning, unexpected game 3 !!'
+REGEX_GATHERLING = r'\[Gatherling\] Event=(.*)'
 
 def load_from_file():
     """"Imports a log from an on-disk file"""
@@ -41,6 +42,7 @@ def import_log(lines: List[str], match_id: int):
     game_lines: List[str] = list()
     for line in lines:
         m = re.match(REGEX_GAME_HEADER, line)
+        gm = re.match(REGEX_GATHERLING, line)
         if m:
             new_id = int(m.group('id'))
             if game_id == 0:
@@ -52,9 +54,21 @@ def import_log(lines: List[str], match_id: int):
         elif re.match(REGEX_SWITCHEROO, line):
             local.has_unexpected_third_game = True
             game_lines.append(line)
+        elif gm:
+            tname = gm.group(1)
+            print("Gatherling Event: {0}".format(tname))
+            process_tourney_info(tname, local)
+            game_lines.append(line)
         else:
             game_lines.append(line)
     game.insert_game(game_id, match_id, '\n'.join(game_lines))
+
+def process_tourney_info(tname, local):
+    tourney = match.get_tournament(tname)
+    if tourney is None:
+        tourney = match.create_tournament(tname)
+    local.is_tournament = True
+    match.create_tournament_info(local.id, tourney.id)
 
 def reimport(local: match.Match):
     for lgame in local.games:
@@ -62,4 +76,8 @@ def reimport(local: match.Match):
             local.has_unexpected_third_game = True
     if local.has_unexpected_third_game is None:
         local.has_unexpected_third_game = False
-    match.db.Commit() # This is bad
+    tournament = re.search(REGEX_GATHERLING, local.games[0].log)
+    local.is_tournament = tournament is not None
+    if tournament:
+        process_tourney_info(tournament.group(1), local)
+    match.db.Commit()

@@ -26,6 +26,10 @@ class Match(View):
         if match.has_unexpected_third_game is None:
             importing.reimport(match)
         self.has_unexpected_third_game = match.has_unexpected_third_game
+        if match.is_tournament is None:
+            importing.reimport(match)
+        self.is_tournament = match.is_tournament
+
 
     def subtitle(self):
         return None

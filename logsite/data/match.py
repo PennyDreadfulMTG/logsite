@@ -25,6 +25,7 @@ class Match(fsa.Model):
     modules = fsa.relationship('Module', secondary=db.match_modules)
     games = fsa.relationship('Game', backref='match')
     format = fsa.relationship('Format')
+    tournament = fsa.relationship('TournamentInfo', backref='match')
 
     def url(self):
         return url_for('show_match', match_id=self.id)
@@ -52,6 +53,18 @@ class Match(fsa.Model):
         else:
             return dtutil.display_date(self.start_time)
 
+class TournamentInfo(fsa.Model):
+    __tablename__ = 'match_tournament'
+    id = sa.Column(sa.Integer, primary_key=True)
+    match_id = sa.Column(sa.Integer, sa.ForeignKey('match.id'), nullable=False)
+    tournament_id = sa.Column(sa.Integer, sa.ForeignKey('tournament.id'), nullable=False)
+    round_num = sa.Column(sa.Integer)
+
+class Tournament(fsa.Model):
+    __tablename__ = 'tournament'
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String(length=200), unique=True, index=True)
+    active = sa.Column(sa.Boolean)
 
 def create_match(match_id: int, format_name: str, comment: str, modules: List[str], players: List[str]) -> Match:
     format_id = db.get_or_insert_format(format_name).id
@@ -72,5 +85,20 @@ def get_recent_matches(count: int=10) -> List[Match]:
 def get_recent_matches_by_player(name: str) -> List[Match]:
     return Match.query.filter(Match.players.any(db.User.name == name)).order_by(Match.id.desc())
 
-def get_recent_matches_by_format(format: int) -> List[Match]:
-    return Match.query.filter(Match.format_id == format)
+def get_recent_matches_by_format(format_id: int) -> List[Match]:
+    return Match.query.filter(Match.format_id == format_id)
+
+def get_tournament(name: str):
+    return Tournament.query.filter_by(name=name).one_or_none()
+
+def create_tournament(name: str):
+    local = Tournament(name=name, active=True)
+    db.Add(local)
+    db.Commit()
+    return local
+
+def create_tournament_info(match_id: int, tournament_id: int):
+    local = TournamentInfo(match_id=match_id, tournament_id=tournament_id)
+    db.Add(local)
+    db.Commit()
+    return local
