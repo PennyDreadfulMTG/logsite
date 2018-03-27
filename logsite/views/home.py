@@ -3,6 +3,7 @@ from flask_babel import gettext
 
 from logsite.view import View
 
+
 # pylint: disable=no-self-use
 class Home(View):
     def __init__(self, matches):

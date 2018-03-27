@@ -1,11 +1,13 @@
 from typing import List
-from flask import url_for
+
 import sqlalchemy as sa
+from flask import url_for
 
 from shared import dtutil
 
 from .. import db
 from ..db import db as fsa
+
 
 class Match(fsa.Model):
     __tablename__ = 'match'

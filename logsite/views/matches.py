@@ -1,7 +1,8 @@
 from flask import request, url_for
 
-from logsite.view import View
 from logsite.data import match
+from logsite.view import View
+
 
 # pylint: disable=no-self-use
 class Matches(View):

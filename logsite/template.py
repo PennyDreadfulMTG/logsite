@@ -1,5 +1,6 @@
 import pystache
 
+
 def render_name(template, *context):
     renderer = CachedRenderer(search_dirs=['templates'])
     return renderer.render_name(template, *context)

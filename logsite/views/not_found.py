@@ -2,6 +2,7 @@ import random
 
 from logsite.view import View
 
+
 # pylint: disable=no-self-use
 class NotFound(View):
     def __init__(self, exception):

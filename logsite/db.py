@@ -1,13 +1,14 @@
 from typing import List
 
+import sqlalchemy as sa
 from flask import url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from sqlalchemy.orm.exc import MultipleResultsFound
-import sqlalchemy as sa
+
+from flask_migrate import Migrate
+from shared import configuration
 
 from . import APP
-from shared import configuration
 
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{user}:{password}@{host}:{port}/{db}'.format(

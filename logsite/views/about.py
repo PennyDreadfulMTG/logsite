@@ -1,7 +1,9 @@
 from flask_babel import gettext
 
-from .. import babel
 from logsite.view import View
+
+from .. import babel
+
 
 # pylint: disable=no-self-use
 class About(View):

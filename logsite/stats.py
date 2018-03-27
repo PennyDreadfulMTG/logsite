@@ -1,9 +1,11 @@
 from sqlalchemy import func, text
 
-from . import db, APP
-from .data import match
-from .api import return_json
 from shared import dtutil
+
+from . import APP, db
+from .api import return_json
+from .data import match
+
 
 @APP.route('/stats.json')
 @APP.route('/stats')
@@ -55,4 +57,3 @@ def stats():
         players = db.db.session.query(db.User).from_statement(stmt).params(fid=f.id).all()
         val['formats'][f.name]['last_month']['recent_players'] = [p.name for p in players]
     return return_json(val)
-

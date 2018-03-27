@@ -1,6 +1,9 @@
 from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database
-from logsite import APP as application, db
+from sqlalchemy_utils import create_database, database_exists
+
+from logsite import APP as application
+from logsite import db
+
 
 def create_schema():
     engine = create_engine(application.config['SQLALCHEMY_DATABASE_URI'])

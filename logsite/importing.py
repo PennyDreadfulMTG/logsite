@@ -1,24 +1,28 @@
-import datetime, glob, os, re, shutil
+import glob
+import os
+import re
+import shutil
 from typing import List
-from . import db
 
-from .data import match, game
+from .data import game, match
 
 REGEX_GAME_HEADER = r'== Game \d \((?P<id>\d+)\) =='
 REGEX_SWITCHEROO = r'!! Warning, unexpected game 3 !!'
 
 def load_from_file():
+    """"Imports a log from an on-disk file"""
     files = glob.glob('import/queue/*.txt')
     for fname in files:
         match_id = int(os.path.basename(fname).split('.')[0])
         if match.get_match(match_id) is None:
-            with open(fname) as f:
-                lines = f.readlines()
+            with open(fname) as fhandle:
+                lines = fhandle.readlines()
                 import_log(lines, match_id)
             shutil.move(fname, 'import/processed/{0}.txt'.format(match_id))
             return
 
 def import_log(lines: List[str], match_id: int):
+    """Processes a log"""
     lines = [line.strip('\r\n') for line in lines]
     print('importing {0}'.format(match_id))
     format_name = lines[0]

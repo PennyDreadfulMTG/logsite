@@ -2,8 +2,10 @@ from flask import url_for
 from sqlalchemy import func
 
 from logsite.view import View
+
 from .. import db
 from ..data import match
+
 
 # pylint: disable=no-self-use
 class People(View):

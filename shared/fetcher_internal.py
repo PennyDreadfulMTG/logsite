@@ -2,7 +2,6 @@ import json
 import urllib.request
 
 import requests
-
 from cachecontrol import CacheControl
 from cachecontrol.caches.file_cache import FileCache
 

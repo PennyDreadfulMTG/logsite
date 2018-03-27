@@ -1,10 +1,12 @@
 import re
 from typing import List
-from flask import url_for
+
 import sqlalchemy as sa
+from flask import url_for
 
 from .. import db
 from ..db import db as fsa
+
 
 class Game(fsa.Model):
     __tablename__ = 'game'

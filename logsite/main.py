@@ -1,13 +1,14 @@
-from werkzeug import exceptions
 import os
-import traceback
 import subprocess
+import traceback
 
-from flask import make_response, redirect, request, send_file, send_from_directory, session, url_for
+from flask import (make_response, redirect, request, send_file,
+                   send_from_directory, session, url_for)
+from werkzeug import exceptions
 
-from . import APP
-from . import views, db, importing
+from . import APP, db, importing, views
 from .data import match
+
 
 @APP.route('/')
 def home():

@@ -4,6 +4,8 @@ from collections import Counter
 from flask import session, url_for
 
 from . import APP, template
+
+
 # pylint: disable=no-self-use, too-many-public-methods
 class View:
     def template(self):

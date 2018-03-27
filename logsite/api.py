@@ -1,11 +1,15 @@
-import datetime, json, subprocess
+import datetime
+import json
+import subprocess
 
 from flask import Response, request, session, url_for
 
-from . import APP, importing
-from .data import match
 from shared import configuration
 from shared.serialization import extra_serializer
+
+from . import APP, importing
+from .data import match
+
 
 @APP.route('/api/admin/')
 def admin():
