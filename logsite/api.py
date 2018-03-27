@@ -55,7 +55,7 @@ def export(match_id: int):
     for game in local.games:
         text += '== Game {n} ({id}) ==\n'.format(n=n, id=game.id)
         n = n + 1
-        text += game.log.strip()
+        text += game.sanitized_log().strip()
         text += '\n\n'
     return (text, 200, {
         'Content-type': 'text/plain; charset=utf-8',
