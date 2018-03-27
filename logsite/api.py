@@ -59,7 +59,7 @@ def export(match_id: int):
         text += '\n\n'
     return (text, 200, {
         'Content-type': 'text/plain; charset=utf-8',
-        # 'Content-Disposition': 'attachment; filename={match_id}.txt'.format(match_id=match_id)
+        'Content-Disposition': 'attachment; filename={match_id}.txt'.format(match_id=match_id)
         })
 
 def generate_error(code, msg):

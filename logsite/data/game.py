@@ -20,7 +20,7 @@ class Game(fsa.Model):
         if "Exception:" in self.log:
             return "Log is not visible at this time.  Please contact Silasary."
         # If we want to remove chat, or OOB messages, do that here.
-        return self.log
+        return self.log.strip()
 
 def insert_game(game_id, match_id, game_lines) -> None:
     local = Game(id=game_id, match_id=match_id, log=game_lines)
