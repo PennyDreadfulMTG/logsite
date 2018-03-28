@@ -12,7 +12,8 @@ from .data import match
 def stats():
     val = {}
     last_switcheroo = match.Match.query.filter(match.Match.has_unexpected_third_game == True).order_by(match.Match.id.desc()).first().start_time
-    val['last_switcheroo'] = last_switcheroo
+    val['last_switcheroo'] = dtutil.dt2ts(last_switcheroo)
+
     val['formats'] = {}
     base_query = db.db.session.query(match.Match, func.count(match.Match.format_id))
     for m in base_query.group_by(match.Match.format_id).order_by(func.count(match.Match.format_id).desc()).all():
