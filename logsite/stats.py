@@ -56,4 +56,6 @@ def stats():
                         """)
         players = db.db.session.query(db.User).from_statement(stmt).params(fid=f.id).all()
         val['formats'][f.name]['last_month']['recent_players'] = [p.name for p in players]
+        last_switcheroo = match.Match.query.filter(match.Match.has_unexpected_third_game == True).order_by(match.Match.id.desc()).first().start_time
+        val['last_switcheroo'] = last_switcheroo
     return return_json(val)

@@ -14,6 +14,8 @@ class Match(View):
         self.comment = match.comment
         self.format_name = match.format_name()
         self.players_string = ' vs '.join([p.name for p in match.players])
+        if not match.games:
+            return
         self.game_one = match.games[0]
         self.has_game_two = False
         self.has_game_three = False
