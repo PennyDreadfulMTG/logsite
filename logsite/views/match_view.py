@@ -2,9 +2,10 @@ import inflect
 import titlecase
 from flask import url_for
 
+from .. import importing
 from ..data.match import Match as Model
 from ..view import View
-from .. import importing
+
 
 # pylint: disable=no-self-use
 class Match(View):

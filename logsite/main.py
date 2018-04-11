@@ -45,12 +45,6 @@ def show_match(match_id):
 def favicon(rest):
     return send_from_directory(os.path.join(APP.root_path, 'static/images/favicon'), 'favicon{rest}'.format(rest=rest))
 
-@APP.route('/reset/db/', methods=['POST'])
-def reset_db():
-    db.db.drop_all()
-    db.db.create_all()
-    return home()
-
 @APP.errorhandler(exceptions.NotFound)
 def not_found(e):
     traceback.print_exception(e, e, None)

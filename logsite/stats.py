@@ -8,7 +8,6 @@ from .data import match
 
 
 @APP.route('/stats.json')
-@APP.route('/stats')
 def stats():
     val = {}
     last_switcheroo = match.Match.query.filter(match.Match.has_unexpected_third_game == True).order_by(match.Match.id.desc()).first().start_time
@@ -59,4 +58,18 @@ def stats():
                         """)
         players = db.db.session.query(db.User).from_statement(stmt).params(fid=f.id).all()
         val['formats'][f.name]['last_month']['recent_players'] = [p.name for p in players]
+    return return_json(val)
+
+@APP.route("/recent.json")
+def recent_json():
+    last_week = dtutil.now() - dtutil.ts2dt(7 * 24 * 60 * 60)
+    val = {}
+    val['formats'] = {}
+    for m in match.Match.query.filter(match.Match.start_time > last_week).all():
+        f = m.format
+        if val['formats'].get(f.name, None) is None:
+            val['formats'][f.name] = {}
+        time = dtutil.dt2ts(m.start_time.replace(microsecond=0, second=0, minute=0))
+        val['formats'][f.name][time] = val['formats'][f.name].get(time, 0) + 1
+
     return return_json(val)

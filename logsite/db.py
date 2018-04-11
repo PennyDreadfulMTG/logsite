@@ -2,10 +2,10 @@ from typing import List
 
 import sqlalchemy as sa
 from flask import url_for
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm.exc import MultipleResultsFound
 
-from flask_migrate import Migrate
 from shared import configuration
 
 from . import APP
