@@ -103,3 +103,4 @@ tmp.png
 /import/*/*.txt
 /.vscode/
 /monkeytype.sqlite3
+.pytest_cache/

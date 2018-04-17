@@ -13,7 +13,7 @@ from .data import match
 @APP.route('/')
 def home():
     importing.load_from_file()
-    view = views.Home(match.get_recent_matches(10).items)
+    view = views.Home()
     return view.page()
 
 @APP.route('/about/')

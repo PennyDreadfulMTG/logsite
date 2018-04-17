@@ -6,8 +6,8 @@ from logsite.view import View
 
 # pylint: disable=no-self-use
 class Home(View):
-    def __init__(self, matches):
-        self.matches = matches
+    def __init__(self):
+        self.matches = match.get_recent_matches(10).items
         self.matches_url = url_for('matches')
 
     def subtitle(self):
