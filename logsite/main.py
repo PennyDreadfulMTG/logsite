@@ -2,8 +2,8 @@ import os
 import subprocess
 import traceback
 
-from flask import (make_response, redirect, request, send_file,
-                   send_from_directory, session, url_for)
+from flask import (redirect, request, send_file, send_from_directory, session,
+                   url_for)
 from werkzeug import exceptions
 
 from . import APP, db, importing, views
