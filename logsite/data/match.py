@@ -86,7 +86,7 @@ def get_recent_matches_by_player(name: str) -> List[Match]:
     return Match.query.filter(Match.players.any(db.User.name == name)).order_by(Match.id.desc())
 
 def get_recent_matches_by_format(format_id: int) -> List[Match]:
-    return Match.query.filter(Match.format_id == format_id)
+    return Match.query.filter(Match.format_id == format_id).order_by(Match.id.desc())
 
 def get_tournament(name: str):
     return Tournament.query.filter_by(name=name).one_or_none()
